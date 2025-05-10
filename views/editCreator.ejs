@@ -1,0 +1,36 @@
+<%- include('partials/header') -%>
+    <main class="container">
+        <div class="row justify-content-center">
+            <section class="col-6 mt-5">
+                <h1>Welcome, <%=user.username%> </h1>
+                <section>
+                    <h2>Your Profile</h2>
+                    <!-- add bio, profile image socials -->
+                    <!--  for socails make a a link and add a font awesome icon with ejs to pull socials -->
+                    <p><%=user.bio%></p>
+                    <!-- figure out html for adding phot, guessing i need a form  -->
+                    <a href="" >Edit Profile</a>
+                    
+                </section>
+                <section>
+                    <h2>
+                        
+                    </h2>
+                </section>
+                <section>
+                    <h2>Upcoming Events</h2>
+                    <!-- gallery of creations upload button  -->
+                </section>
+                <!-- figure out how to edit profile photo -->
+                <form action="/creator/editCreator?_method=PUT" method="POST">
+                    <p name="bio"> <%=creator.bio%> </p>
+                    <input type="text" name="instagram" value="<%=creator.instagram%>" >
+                    <input type="text" name="tiktok" value="<%=creator.tiktok%>" >
+                    <input type="text" name="website" value="<%=creator.website%>" >
+                    <button type="submit">Update</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+<%- include('partials/footer') -%>

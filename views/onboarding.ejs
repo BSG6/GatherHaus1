@@ -1,0 +1,19 @@
+<%- include('partials/header') -%>
+    <main class="container">
+        <div class="row justify-content-center">
+            <section class="col-6 mt-5">
+                
+                <form action="/creator/onboarding" method="POST">
+                    <textarea name="bio" placeholder="Tell us about yourself"></textarea>
+                    <input type="text" name="instagram" placeholder="Instagram handle" />
+                    <input type="text" name="tiktok" placeholder="TikTok handle" />
+                    <input type="text" name="website" placeholder="Website URL" />
+                    <button type="submit">Finish Setup</button>
+                </form>
+
+
+            </section>
+        </div>
+    </main>
+
+<%- include('partials/footer') -%>
