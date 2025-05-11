@@ -3,13 +3,22 @@ const validator = require("validator");
 const User = require("../models/User");
 
 exports.getLogin = (req, res) => {
-  if (req.user) {
-    return res.redirect("/profile");
+    if (req.user) {
+      if(req.user.accountType === "creator") {
+        return res.redirect("/creator/dashboard")
+      }else if (req.user.accountType === "host"){
+        return res.redirect("/host/hostDashboard")
+      }else if (req.user.accountType === "influencer"){
+        return res.redirect("/influencer/influencerDashboard")
+      }else{
+      return res.redirect("/")}
+    };
+      res.render("login", {
+      title: "Login",
+    });
   }
-  res.render("login", {
-    title: "Login",
-  });
-};
+
+
 
 exports.postLogin = (req, res, next) => {
   const validationErrors = [];
@@ -37,9 +46,19 @@ exports.postLogin = (req, res, next) => {
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
+        
       }
+      if (req.user) {
+        if(req.user.accountType === "creator") {
+          return res.redirect("/creator/dashboard")
+        }else if (req.user.accountType === "host"){
+          return res.redirect("/host/hostDashboard")
+        }else if (req.user.accountType === "influencer"){
+          return res.redirect("/influencer/influencerDashboard")
+        }else{
+        return res.redirect("/")}
+      };
       req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/profile");
     });
   })(req, res, next);
 };
@@ -52,7 +71,7 @@ exports.logout = (req, res) => {
     if (err)
       console.log("Error : Failed to destroy the session during logout.", err);
     req.user = null;
-    res.redirect("/");
+    return res.redirect("/");
   });
 };
 
@@ -100,7 +119,7 @@ exports.postSignup = async (req, res, next) => {
       userName: req.body.userName,
       email: req.body.email,
       password: req.body.password,
-      role: req.body.role
+      accountType: req.body.accountType
     });
 
     await user.save();
@@ -111,13 +130,13 @@ exports.postSignup = async (req, res, next) => {
       }
       // check what accounType the user is
       if(user.accountType === "creator") {
-        return res.direct("/creator/onboarding")
+        return res.redirect("/creator/onboarding")
       }else if (user.accountType === "host"){
-        return res.direct("/host/onboarding")
+        return res.redirect("/host/onboarding")
       }else if (user.accountType === "influencer"){
-        return res.direct("/influencer/onboarding")
+        return res.redirect("/influencer/onboarding")
       }else{
-      res.redirect("/")}
+      return res.redirect("/")}
     });
   } catch (err) {
     return next(err);

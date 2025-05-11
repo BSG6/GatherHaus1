@@ -13,6 +13,7 @@ const postRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
 const creatorRoutes = require("./routes/creator");
 
+
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
@@ -60,6 +61,7 @@ app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 app.use("/creator", creatorRoutes)
+
 
 //Server Running
 app.listen(process.env.PORT, () => {

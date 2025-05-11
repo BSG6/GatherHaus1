@@ -1,0 +1,101 @@
+<%- include('partials/header') -%>
+    <main class="container">
+        <div class="row justify-content-center">
+            <section class="col-6 mt-5">
+                <!-- header -->
+                <section class="header">
+                    <h1>Welcome, <%=user.username%> </h1>
+                    <a href="/logout">Logout</a>
+                </section>
+                <!-- profile info -->
+                <section>
+                    <h2> <%=user.userName%> </h2>
+                    <!-- add bio, profile image socials -->
+                    <!--  use the || as a fallback if there is no data, it will push the default message ex. <p>Bio <=creator.bio%> || "No Bio Yet" </p> -->
+                    <section>
+                        <h2>
+                            Social Links
+                        </h2>
+                        <!--  for socails make a a link and add a font awesome icon with ejs to pull socials -->
+                        <ul>
+                            <!-- IF STATEMENT BEESTING HAS NO = SYMBOL!!! -->
+                            <% if (creator.instagram){%>
+                                <li>
+                                    <a href="<%=creator.instagram%>" target="_blank">
+                                        <i class="fab fa-instagram"></i> Instagram
+                                    </a>
+                                    <!-- had to give else statements bc i hadnt uploaded a social link and it was coming up as null. I dont like the way it is currently displaying, find out how to bypass it all together if they dont provide the info -->
+                                </li>
+                                    <% } else { %>
+                                        <p><i class="fab fa-instagram"></i> Instagram not provided</p>
+                                    <% } %>
+                            
+                            <% if (creator.tiktok){%>
+                                <li>
+                                    <a href="<%=creator.tiktok%>" target="_blank">
+                                        <i class="fab fa-tiktok"></i> Tiktok
+                                    </a>
+                                </li>
+                                    <% } else { %>
+                                        <p><i class="fab fa-tiktok"></i> Tiktok not provided</p>
+                                    <% } %>
+                            
+                            <% if (creator.website){%>
+                                <li>
+                                    <a href="<%=creator.website%>" target="_blank">
+                                        <i class="fab fa-globe"></i> Website
+                                    </a>
+                                </li>
+                                    <% } else { %>
+                                        <p><i class="fab fa-globe"></i> Website not provided</p>
+                                    <% } %>
+                            
+                        </ul>
+                        <a href="/creator/edit">Edit Profile</a>
+                    </section>
+                    
+                    <!-- figure out html for adding photo, guessing i need a form (This should be on the edit ejs)  -->
+                    
+                </section>
+                <!-- images of creator work -->
+                <section>
+                    <h2>
+                        <!-- I dont like the title, need to workshop -->
+                        My Talents
+                    </h2>
+                    <section>
+                        <%if (creator.images && creator.images.length > 0){%>
+                            <div>
+                                <!-- uploaded images (urls) looped thru to display, I want a carousel ( SwiperJS or React????? Ask Tony) -->
+                                <% creator.images.forEach(function(image) { %>
+                                    <img src="<%= image %>" alt="Artwork" class="art-thumbnail">
+                                <% }) %>
+                            </div>
+                            <% } else { %>
+                                <p>You haven/’t uploaded any art yet.</p>
+                            <% } %>
+                            <a href="/creator/upload">Upload New Art</a>
+                    </section>
+                </section>
+                <!-- events -->
+                <section>
+                    <h2>Upcoming Events</h2>
+                    <!-- gallery of creations upload button  -->
+                    
+                    <% if (creator.eventsAttending && creator.eventsAttending.length > 0) { %>
+                        <ul>
+                            <% creator.eventsAttending.forEach(function(event) { %>
+                            <li><%= event.title %> - <%= event.date %></li>
+                            <% }) %>
+                        </ul>
+                        <% } else { %>
+                        <p>No events added yet.</p>
+                        <% } %>
+                    <a href="/events">Browse Events</a>
+                </section>
+            
+            </section>
+        </div>
+    </main>
+
+<%- include('partials/footer') -%>
