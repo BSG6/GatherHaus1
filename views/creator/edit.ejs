@@ -1,10 +1,11 @@
 <%- include('../partials/header') -%>
-    <main class="container">
-        <div class="row justify-content-center">
-            <section class="col-6 mt-5">
+    <main class=""
+    >
+        <div class="">
+            <section class="">
                 <h1>Welcome, <%=user.userName%> </h1>
                 <section>
-                    <h2>Your Profile</h2>
+                    <h2>Edit Your Profile</h2>
                     <!-- add bio, profile image socials -->
                     <!--  for socails make a a link and add a font awesome icon with ejs to pull socials -->
                 <!-- DOUBLE CHECK TO SEE IF CREATOR OR USER.BIO -->
@@ -24,24 +25,32 @@
                 </section>
                 <!-- figure out how to edit profile photo -->
                 <form action="/creator/edit?_method=PUT" method="POST">
-                    <input type="text" name="bio" value="<%=creator.bio%>" >
+                    <label for="bio">Bio</label>
+                    <input type="text" name="bio" value="<%=creator.bio%>" placeholder="Please enter bio">
+                    <label for="location">Location</label>
                     <input type="text" name="location" value="<%=creator.location%>">
                     <!-- craft selection -->
+                    <label for="craft">What do you create?</label>
+                    
                     <select name="craft" id="craft" required>
-                        <% crafts.forEach(c => { %>
+                        <% craftOptions.forEach(option => { %>
                             <!--  Tony edited, put in anki. This checks to see if the current logged in user's craft matches what is in the database if so it adds "selected"-->
-                            <option value="<%= c.name %>" <%= user.craft === c.name ? "selected" : "" %>><%= c.name %></option>
+                            <option placeholder="Select your craft" value="<%= option %>" <%= creator.craft === option ? "selected" : "" %>><%= option %></option>
                             <% }); %>
-                            <option value="Other" <%= creator.craft === "Other" ? "selected" : "" %>>Other</option>
+                
                         </select>
+                        <label for="instagram">Instagram Handle</label>
                         <input type="text" name="instagram" value="<%=creator.instagram%>" >
+                        <label for="tiktok">Tiktok Handle</label>
                         <input type="text" name="tiktok" value="<%=creator.tiktok%>" >
+                        <label for="website">Website</label>
                         <input type="text" name="website" value="<%=creator.website%>" >
                         <!-- collab button -->
                         <label>
-                            <input type="checkbox" name="readyToCollab" value="true" <%= creator.readyToCollab ? 'checked' : '' %> />
                             Open to Collaboration
                         </label>
+                            <input type="checkbox" name="readyToCollab" value="true" <%= creator.readyToCollab ? 'checked' : '' %> />
+                            <label for="collabMethod">How can they get in touch?</label>
                         <input type="text" name="collabMethod" value="<%=creator.collabMethod%>">
                     <button type="submit">Update</button>
                 </form>

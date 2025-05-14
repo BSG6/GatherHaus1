@@ -1,108 +1,95 @@
 <%- include('../partials/header') -%>
-    <main class="">
-        <div class="">
-            <section class="">
-                <!-- header -->
-                <section class="">
-                    <h1>Welcome, <%=user.userName%> </h1>
-                    <a href="/logout">Logout</a>
 
-                    <a href="/creator/profile/<%=creator._id%>">View Your Profile</a>
-
-                </section>
-                <!-- profile info -->
-                <section>
-                    <h2>hello</h2>
-                    <p> <%=creator.bio%> </p>
-                    <!-- add bio, profile image socials -->
-                    <!--  use the || as a fallback if there is no data, it will push the default message ex. <p>Bio <=creator.bio%> || "No Bio Yet" </p> -->
-                    <section>
-                        <h2>
-                            Social Links
-                        </h2>
-                        <!--  for socails make a a link and add a font awesome icon with ejs to pull socials -->
-                        <ul>
-                            <!-- IF STATEMENT BEESTING HAS NO = SYMBOL!!! -->
-                            <% if (creator.instagram){%>
-                                <li>
-                                    <a href="<%=creator.instagram%>" target="_blank">
-                                        <i class="fab fa-instagram"></i> Instagram
-                                    </a>
-                                    <!-- had to give else statements bc i hadnt uploaded a social link and it was coming up as null. I dont like the way it is currently displaying, find out how to bypass it all together if they dont provide the info -->
-                                </li>
-                                    <% } else { %>
-                                        <p><i class="fab fa-instagram"></i> Instagram not provided</p>
-                                    <% } %>
-                            
-                            <% if (creator.tiktok){%>
-                                <li>
-                                    <a href="<%=creator.tiktok%>" target="_blank">
-                                        <i class="fab fa-tiktok"></i> Tiktok
-                                    </a>
-                                </li>
-                                    <% } else { %>
-                                        <p><i class="fab fa-tiktok"></i> Tiktok not provided</p>
-                                    <% } %>
-                            
-                            <% if (creator.website){%>
-                                <li>
-                                    <a href="<%=creator.website%>" target="_blank">
-                                        <i class="fab fa-globe"></i> Website
-                                    </a>
-                                </li>
-                                    <% } else { %>
-                                        <p><i class="fab fa-globe"></i> Website not provided</p>
-                                    <% } %>
-                            
-                        </ul>
-                        <a href="/creator/edit">Edit Profile</a>
-                        <a href="/creator/collab">Collab with others</a>
-
-                    </section>
-                    
-                    <!-- figure out html for adding photo, guessing i need a form (This should be on the edit ejs)  --
-                    
-                </section>
-                <!-- images of creator work -->
-                <section>
-                    <h2>
-                        <!-- I dont like the title, need to workshop -->
-                        My Talents
-                    </h2>
-                    <section class="carousel carousel-center rounded-box">
-                        <%if (creator.images && creator.images.length > 0){%>
-                            <div >
-                                <!-- uploaded images (urls) looped thru to display, I want a carousel ( SwiperJS or React????? Ask Tony) -->
-                                <% creator.images.forEach(function(image) { %>
-                                    <div class="carousel-item">
-                                        <img src="<%= image.url %>" alt="Artwork" class="art-thumbnail">
-                                    </div>
-                                    
-                                <% }) %>
-                            </div>
-                            <% } else { %>
-                                <p>You haven/’t uploaded any art yet.</p>
-                            <% } %>
-                            <a href="/creator/edit">Upload New Art</a>
-                    </section>
-                </section>
-                <!-- events -->
-                <section>
-                    
-                    <!-- gallery of creations upload button  -->
-                <!-- have to revisit the partial, -->
-                <%- include('../partials/displayEvent', { events }) %>
-
-
-                <a href="/events/add">Add Events</a>
-
-                <!-- <a href="/events">Browse Events</a> -->
-                <!--  -->
-                </section>
-                
-                
-            </section>
-        </div>
-    </main>
-
+    <<div class="ml-64 min-h-screen bg-[#FFFFFF]">
+        <main class="max-w-5xl mx-auto pt-6 px-4 space-y-8">
+    
+        <!-- Welcome Header -->
+        <section class="border-b border-[#C1C1C1] pb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+            <h1 class="text-4xl font-black text-[#1F1F1F]">Welcome, <%= user.userName %></h1>
+            <p class="text-sm text-gray-500">Location: <%= creator.location || "Not added" %></p>
+            </div>
+            <% if (creator.profileImage) { %>
+            <img src="<%= creator.profileImage %>" alt="Profile" class="w-20 h-20 object-cover rounded-full border border-[#C1C1C1] shadow-sm">
+            <% } else { %>
+            <div class="w-20 h-20 rounded-full bg-gray-200 text-xs flex items-center justify-center text-gray-500">No Image</div>
+            <% } %>
+        </section>
+    
+        <!-- About You -->
+        <section class="bg-white border border-[#C1C1C1] rounded-lg p-6 shadow-sm space-y-4">
+            <h2 class="text-2xl font-semibold text-[#000000] border-b border-[#C1C1C1] pb-2">About You</h2>
+            <p><%= creator.bio || "No bio yet." %></p>
+            <div class="text-sm text-[#1F1F1F] space-y-1">
+            <p><strong>Craft:</strong> <%= creator.craft || "Not specified" %></p>
+            <p><strong>Ready to Collab:</strong> <%= creator.readyToCollab ? "Yes ✅" : "No ❌" %></p>
+            </div>
+        </section>
+    
+        <!-- Social Links -->
+        <section class="bg-white border border-[#C1C1C1] rounded-lg p-6 shadow-sm space-y-4">
+            <h2 class="text-2xl font-semibold text-[#000000] border-b border-[#C1C1C1] pb-2">Social Links</h2>
+            <ul class="text-sm space-y-2">
+            <% if (creator.instagram) { %>
+                <li><a href="<%= creator.instagram %>" target="_blank" class="text-[#1F1F1F] font-semibold hover:text-[#7E5DFA] hover:underline"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <% } %>
+            <% if (creator.tiktok) { %>
+                <li><a href="<%= creator.tiktok %>" target="_blank" class="text-[#1F1F1F] font-semibold hover:text-[#7E5DFA] hover:underline"><i class="fab fa-tiktok"></i> TikTok</a></li>
+            <% } %>
+            <% if (creator.website) { %>
+                <li><a href="<%= creator.website %>" target="_blank" class="text-[#1F1F1F] font-semibold hover:text-[#7E5DFA] hover:underline"><i class="fas fa-globe"></i> Website</a></li>
+            <% } %>
+            <% if (!creator.instagram && !creator.tiktok && !creator.website) { %>
+                <li class="text-gray-400">No social links provided.</li>
+            <% } %>
+            </ul>
+        </section>
+    
+        <!-- Talents / Gallery -->
+        <section class="bg-[#F9F9F9] border border-[#C1C1C1] rounded-lg p-6 shadow-inner space-y-4">
+            <h2 class="text-2xl font-semibold text-[#000000] border-b border-[#C1C1C1] pb-2">My Talents</h2>
+            <% if (creator.images && creator.images.length > 0) { %>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <% creator.images.forEach(image => { %>
+                <img src="<%= image.url %>" class="rounded-lg border border-[#EAEAEA] object-cover w-full h-auto" />
+                <% }) %>
+            </div>
+            <% } else { %>
+            <p class="text-gray-400">You haven’t uploaded any art yet.</p>
+            <% } %>
+            <a href="/creator/edit"
+            class="inline-block mt-2 border-2 border-[#000000] text-[#000000] font-bold hover:bg-[#000000] hover:text-white px-5 py-2 rounded-md transition-all duration-200">
+            Upload New Art
+            </a>
+        </section>
+    
+        <!-- Events Section -->
+        <section class="bg-[#F6F3FF] border border-[#C1C1C1] rounded-lg p-6 shadow-sm space-y-4">
+            <h2 class="text-2xl font-semibold text-[#1F1F1F] border-b border-[#C1C1C1] pb-2">My Events</h2>
+            <%- include('../partials/displayEvent', { events }) %>
+            <a href="/events/add"
+            class="inline-block mt-2 border-2 border-[#7E5DFA] text-[#7E5DFA] font-bold hover:bg-[#7E5DFA] hover:text-white px-5 py-2 rounded-md transition-all duration-200">
+            + Add Event
+            </a>
+        </section>
+    
+        <!-- Bottom Actions -->
+        <section class="flex flex-wrap gap-4 pt-4 border-t border-[#C1C1C1]">
+            <a href="/creator/profile/<%= creator._id %>"
+            class="border-2 border-[#5FC4B6] text-[#5FC4B6] font-bold hover:bg-[#5FC4B6] hover:text-white px-4 py-2 rounded-md transition-all duration-200">
+            View Profile
+            </a>
+            <a href="/creator/edit"
+            class="border-2 border-[#1F1F1F] text-[#1F1F1F] font-bold hover:bg-[#1F1F1F] hover:text-white px-4 py-2 rounded-md transition-all duration-200">
+            Edit Profile
+            </a>
+            <a href="/creator/collab"
+            class="border-2 border-[#7E5DFA] text-[#7E5DFA] font-bold hover:bg-[#7E5DFA] hover:text-white px-4 py-2 rounded-md transition-all duration-200">
+            Collab With Others
+            </a>
+        </section>
+    
+        </main>
+    </div>
+  
 <%- include('../partials/footer') -%>

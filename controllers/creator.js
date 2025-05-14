@@ -43,14 +43,16 @@ module.exports = {
     // edit profile/dashbaord
     getEditProfile: async (req, res) => {
         try {
+            const events = await Event.find().sort({ date: -1 }).lean();
+
             const creator = await Creator.findOne({user: req.user._id})
             // this helps pull from the model (enum)
-            const crafts = Creator.schema.path("craft").enumValues;
-            res.render("creator/edit", { creator: creator, user: req.user, crafts});
+            const craftOptions = Creator.schema.path("craft").enumValues;
+            res.render("creator/edit", { creator:creator, user: req.user, craftOptions, events});
         } catch (err) {
         console.log("err in getEditProfile",err);
                     // console.log("edit creator:", creator);
-        return res.redirect("/creator/dashboard")
+        return res.redirect("/creator/dashboard", {user: req.user, craftOptions})
         }
     },
      // update profile/dashbaord (after edit)
@@ -83,7 +85,8 @@ module.exports = {
             // console.log("what is the current id", req.user._id)
             // .populate, populates specific data by id
             const creator = await Creator.findOne({user: req.user._id}).populate('eventsAttending').lean()
-            const events = await Event.find().sort({ date: -1 }).lean();
+            const events = await Event.find({ createdBy: req.user._id }).sort({ date: -1 }).lean();
+            const craftOptions = Creator.schema.path("craft").enumValues;
 
                     if (!creator){
                     // literally took us 1 hour to debug, and here I was thinking I was a pro at those highlights magazines back in the day lol, dont you EVER FORGET TO DIRECT your route "cries digital tears"
@@ -94,7 +97,8 @@ module.exports = {
                         creator,
                         user: req.user,
                         events: creator.eventsAttending,
-                    
+                        craftOptions, 
+                        
                     });
                 
         } catch (err) {
@@ -153,9 +157,9 @@ module.exports = {
             // Upload image to cloudinary
             // const result = await cloudinary.uploader.upload(req.file.path);
             const events = await Event.find();
-            const creator = await Creator.findOne({ user: req.user._id })
-            .populate("eventsAttending")
-            .lean();
+            // const creator = await Creator.findOne({ user: req.user._id })
+            // .populate("eventsAttending")
+            // .lean();
             // const user = await User.findById(creator.user).lean()
 
             const newEvent = await Event.create({
@@ -178,7 +182,7 @@ module.exports = {
             // const events = await Event.find().sort({ date: 1 }).lean();
 
             console.log("event has been added!", events);
-            res.render("/creator/edit", {creator, user: req.user._id, events: creator.eventsAttending});
+            res.render("/creator/dasboard");
             } catch (err) {
             console.log("err creating event",err);
             }

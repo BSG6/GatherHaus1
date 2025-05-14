@@ -1,8 +1,7 @@
 <%- include('partials/header') -%>
 
-
-
-<form action="/events" method="POST">
+<main class="">
+    <form action="/events" method="POST">
     <input type="text" name="title" placeholder="Event Title" required />
     <textarea name="description" placeholder="Details..." required></textarea>
     <input type="datetime-local" name="date" required />
@@ -10,6 +9,9 @@
     <input type="text" name="link" placeholder="Link to event">
     <button type="submit">Create Event</button>
 </form>
+</main>
+
+
 <%- include('partials/footer') -%>
 
 <!-- when there is a form you have to use formAction with beestings <formAction%> , when you "include" it on an ejs sheet use <include(action="<formAction%>" when you add it to the ejs use BEESTING- include('../partials/uploadForm', {formAction:'routepath'})BEESTING)--> 

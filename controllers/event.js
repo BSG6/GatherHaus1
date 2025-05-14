@@ -38,8 +38,9 @@ createEvents: async (req, res) => {
         // const result = await cloudinary.uploader.upload(req.file.path);
         // const events = await Event.find();
             const creator = await Creator.findOne({ user: req.user._id })
-            
-        await Event.create({
+            const events = await Event.find().sort({ date: -1 }).lean();
+
+            const newEvent = await Event.create({
             title: req.body.title,
             location: req.body.location,
             description: req.body.description,
@@ -53,7 +54,7 @@ createEvents: async (req, res) => {
         });
         await Creator.findOneAndUpdate(
             { user: req.user._id },
-            { $push: { eventsAttending: Event._id } }
+            { $push: { eventsAttending: newEvent._id } }
         );
         console.log("Post has been added!");
         res.redirect("creator/dashboard");
