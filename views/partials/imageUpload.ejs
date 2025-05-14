@@ -1,0 +1,9 @@
+<form action="<%= formAction %>" method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" accpet="image/*">
+    <button type="submit">Upload Image</button>
+</form>
+
+<!-- 
+Apply this for whenyou add to ejs, not in actual partial. 
+
+I wanted to make reusable pieces for ejs. So they can actually be utilized. when there is a form you have to use formAction with beestings <formAction%> , when you "include" it on an ejs sheet use <include(action="<formAction%>" when you add it to the ejs use BEESTING- include('../partials/uploadForm', {formAction:'routepath'})BEESTING)-->

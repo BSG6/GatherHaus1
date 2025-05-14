@@ -1,0 +1,24 @@
+<section>
+    <h2>Upcoming Events</h2>
+    
+        <% if (events && events.length > 0) { %>
+        <% events.forEach(event => { %>
+            <div class="event-card">
+            <h3><%= event.title %></h3>
+            <p>Date: <%= event.date %></p>
+            <p>Location: <%= event.location %></p>
+            <p><%= event.description %></p>
+            <% if (event.link) { %>
+                <p><a href="<%= event.link %>" target="_blank">More Info</a></p>
+            <% } %>
+            </div>
+        <% }) %>
+        <% } else { %>
+        <p>No upcoming events yet.</p>
+    <% } %>
+</section>
+
+
+<a href="/events">Browse Events</a>
+
+<!-- when using the partial in ejs you can override what is being called BEESTING -include("../partials/displayEvent", {here you add what you want to call, in this case it would be . events}) -->

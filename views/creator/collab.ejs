@@ -1,0 +1,31 @@
+
+<%- include('../partials/header') -%>
+<main class="bg-gray-800 text-gray-100 flex">
+    <h1>Discover Creators</h1>
+
+    <div class="row">
+        <% creators.forEach(creator => { %>
+        <div class="">
+            <div class="">
+            <h3><%= creator.name%></h3>
+
+            <% if (creator.bio) { %>
+                <p><%= creator.bio.substring(0, 100) %>...</p>
+            <% } %>
+
+            <p>Craft: <%= creator.craft || "N/A" %></p>
+            <p>Location: <%= creator.location || "N/A" %></p>
+
+            <% if (creator.readyToCollab) { %>
+                <span class="">Open to Collaborate</span>
+            <% } else { %>
+                <span class="">Not Currently Open</span>
+            <% } %>
+
+            <a href="/creator/<%= creator.name %>" class="btn btn-outline-primary mt-2">View Profile</a>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</main>
+<%- include('../partials/footer') -%>

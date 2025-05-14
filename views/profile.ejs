@@ -1,46 +1,101 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
+<div class="public-profile">
+  
+  <% if (user._id.toString() === creator.user._id.toString()) { %>
+    <h1><%= user.userName %>'s Profile</h1>    
+  <% } else  { %>
+    <h1><%= creator.name %>'s Profile</h1>
+    <% } %>
+
+  <!-- wanted to put this in a controller but not exactly sure if it would work or how to and im down to the wireeeee -->
+  <% if (user.accountType === "creator") { %>
+    <a href="/creator/dashboard">← Back to Dashboard</a>
+  <% } else if (user.accountType === "host") { %>
+    <a href="/host/dashboard">← Back to Dashboard</a>
+  <% } else if (user.accountType === "influencer") { %>
+    <a href="/influencer/dashboard">← Back to Dashboard</a>
+  <% } %>
+
+
+  <% if (creator.bio) { %>
+    <p>Bio: <%= creator.bio %></p>
+  <% } %>
+<!-- add font awesome links -->
+  <% if (creator.instagram) { %>
+    <p><a href="<%= creator.instagram %>" target="_blank">Instagram</a></p>
+  <% } %>
+
+  <% if (creator.website) { %>
+    <p><a href="<%= creator.website %>" target="_blank">Website</a></p>
+  <% } %>
+
+  <p>Craft: <%= creator.craft || "N/A" %></p>
+  <p>Location: <%= creator.location || "N/A" %></p>
+
+  <% if (creator.readyToCollab) { %>
+    <span class="">Open to Collaborate</span>
+  <% } else { %>
+    <span class="">Not Currently Open</span>
+  <% } %>
+
+  <h2>
+    Social Links
+</h2>
+<!--  for socails make a a link and add a font awesome icon with ejs to pull socials -->
+<ul>
+    <!-- IF STATEMENT BEESTING HAS NO = SYMBOL!!! -->
+    <% if (creator.instagram){%>
+        <li>
+            <a href="<%=creator.instagram%>" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram
             </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/creator/dashboard">Return to Feed</a>
-        </div>  
-      </div>  
-    </div>
+            <!-- had to give else statements bc i hadnt uploaded a social link and it was coming up as null. I dont like the way it is currently displaying, find out how to bypass it all together if they dont provide the info -->
+        </li>
+            <% } else { %>
+                <p><i class="fab fa-instagram"></i> Instagram not provided</p>
+            <% } %>
+    
+    <% if (creator.tiktok){%>
+        <li>
+            <a href="<%=creator.tiktok%>" target="_blank">
+                <i class="fab fa-tiktok"></i> Tiktok
+            </a>
+        </li>
+            <% } else { %>
+                <p><i class="fab fa-tiktok"></i> Tiktok not provided</p>
+            <% } %>
+    
+    <% if (creator.website){%>
+        <li>
+            <a href="<%=creator.website%>" target="_blank">
+                <i class="fab fa-globe"></i> Website
+            </a>
+        </li>
+            <% } else { %>
+                <p><i class="fab fa-globe"></i> Website not provided</p>
+            <% } %>
+    
+</ul>
+
+  <div class="gallery">
+    <% creator.images.forEach(image => { %>
+      <div class="image-wrap">
+        <img src="<%= image.url %>" alt="Creator upload" />
+      </div>
+    <% }) %>
   </div>
 </div>
+
+<section>
+<% if (creator.eventsAttending && creator.eventsAttending.length > 0) { %>
+  <ul>
+      <% creator.eventsAttending.forEach(function(event) { %>
+      <li><%= event.title %> - <%= event.date %></li>
+      <% }) %>
+  </ul>
+  <% } else { %>
+  <p>No events added yet.</p>
+  <% } %>
+</section>
+
 <%- include('partials/footer') -%>

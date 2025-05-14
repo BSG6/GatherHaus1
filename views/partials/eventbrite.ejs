@@ -1,0 +1,29 @@
+<h1>Eventbrite Events</h1>
+
+<form action="/creator/dashboard" method="GET">
+    <label for="category">Search by Category:</label>
+    <select name="category" id="category">
+        <option value="103">Music</option>
+        <option value="101">Business</option>
+        <option value="110">Food & Drink</option>
+        <option value="113">Community</option>
+        <option value="105">Arts</option>
+        <option value="107">Health & Wellness</option>
+        <option value="102">Science & Tech</option>
+        </select>
+    <button type="submit">Search</button>
+</form>
+
+<% if (events && events.length > 0) { %>
+    <ul>
+        <% events.forEach(event => { %>
+            <li>
+            <%= event.name.text %>
+            <%= new Date(event.start.local).toLocaleString() %><br>
+            <a href="<%= event.url %>" target="_blank">View Event</a>
+            </li>
+        <% }) %>
+        </ul>
+    <% } else { %>
+        <p>No Eventbrite events found.</p>
+<% } %>

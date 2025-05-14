@@ -5,11 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "postcss input.css -o public/css/style.css --watch"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@tailwindcss/cli": "^4.1.6",
+    "axios": "^1.9.0",
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.25.1",
     "connect-mongo": "^3.2.0",
@@ -26,5 +29,22 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "validator": "^13.6.0"
-  }
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.6",
+    "autoprefixer": "^10.4.21",
+    "daisyui": "^5.0.35",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^4.1.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BSG6/GatherHaus1.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/BSG6/GatherHaus1/issues"
+  },
+  "homepage": "https://github.com/BSG6/GatherHaus1#readme"
 }

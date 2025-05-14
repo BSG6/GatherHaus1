@@ -1,0 +1,26 @@
+<%- include('../partials/header') -%>
+
+<main class="container">
+    <h1>All Events</h1>
+
+    <% if (events.length === 0) { %>
+        <p>No events found.</p>
+    <% } else { %>
+        <div class="row">
+        <% events.forEach(event => { %>
+            <div class="">
+            <div class="">
+                <h3><%= event.title %></h3>
+                <p>Location:<%= event.location %></p>
+
+                <p>Date:<%= new Date(event.date).toLocaleDateString() %></p>
+                <p><%= event.description %>...</p>
+                <a href="<%= event.link %>" target="_blank" class="">Event Link</a>
+            </div>
+            </div>
+        <% }) %>
+        </div>
+    <% } %>
+</main>
+
+<%- include('../partials/footer') -%>

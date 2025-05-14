@@ -1,15 +1,19 @@
-<%- include('partials/header') -%>
-    <main class="container">
-        <div class="row justify-content-center">
-            <section class="col-6 mt-5">
+<%- include('../partials/header') -%>
+    <main class="">
+        <div class="">
+            <section class="">
                 <!-- header -->
-                <section class="header">
-                    <h1>Welcome, <%=user.username%> </h1>
+                <section class="">
+                    <h1>Welcome, <%=user.userName%> </h1>
                     <a href="/logout">Logout</a>
+
+                    <a href="/creator/profile/<%=creator._id%>">View Your Profile</a>
+
                 </section>
                 <!-- profile info -->
                 <section>
-                    <h2> <%=user.userName%> </h2>
+                    <h2>hello</h2>
+                    <p> <%=creator.bio%> </p>
                     <!-- add bio, profile image socials -->
                     <!--  use the || as a fallback if there is no data, it will push the default message ex. <p>Bio <=creator.bio%> || "No Bio Yet" </p> -->
                     <section>
@@ -52,9 +56,11 @@
                             
                         </ul>
                         <a href="/creator/edit">Edit Profile</a>
+                        <a href="/creator/collab">Collab with others</a>
+
                     </section>
                     
-                    <!-- figure out html for adding photo, guessing i need a form (This should be on the edit ejs)  -->
+                    <!-- figure out html for adding photo, guessing i need a form (This should be on the edit ejs)  --
                     
                 </section>
                 <!-- images of creator work -->
@@ -63,39 +69,40 @@
                         <!-- I dont like the title, need to workshop -->
                         My Talents
                     </h2>
-                    <section>
+                    <section class="carousel carousel-center rounded-box">
                         <%if (creator.images && creator.images.length > 0){%>
-                            <div>
+                            <div >
                                 <!-- uploaded images (urls) looped thru to display, I want a carousel ( SwiperJS or React????? Ask Tony) -->
                                 <% creator.images.forEach(function(image) { %>
-                                    <img src="<%= image %>" alt="Artwork" class="art-thumbnail">
+                                    <div class="carousel-item">
+                                        <img src="<%= image.url %>" alt="Artwork" class="art-thumbnail">
+                                    </div>
+                                    
                                 <% }) %>
                             </div>
                             <% } else { %>
                                 <p>You haven/’t uploaded any art yet.</p>
                             <% } %>
-                            <a href="/creator/upload">Upload New Art</a>
+                            <a href="/creator/edit">Upload New Art</a>
                     </section>
                 </section>
                 <!-- events -->
                 <section>
-                    <h2>Upcoming Events</h2>
-                    <!-- gallery of creations upload button  -->
                     
-                    <% if (creator.eventsAttending && creator.eventsAttending.length > 0) { %>
-                        <ul>
-                            <% creator.eventsAttending.forEach(function(event) { %>
-                            <li><%= event.title %> - <%= event.date %></li>
-                            <% }) %>
-                        </ul>
-                        <% } else { %>
-                        <p>No events added yet.</p>
-                        <% } %>
-                    <a href="/events">Browse Events</a>
+                    <!-- gallery of creations upload button  -->
+                <!-- have to revisit the partial, -->
+                <%- include('../partials/displayEvent', { events }) %>
+
+
+                <a href="/events/add">Add Events</a>
+
+                <!-- <a href="/events">Browse Events</a> -->
+                <!--  -->
                 </section>
-            
+                
+                
             </section>
         </div>
     </main>
 
-<%- include('partials/footer') -%>
+<%- include('../partials/footer') -%>

@@ -1,0 +1,52 @@
+<%- include('../partials/header') -%>
+    <main class="container">
+        <div class="row justify-content-center">
+            <section class="col-6 mt-5">
+                <h1>Welcome, <%=user.userName%> </h1>
+                <section>
+                    <h2>Your Profile</h2>
+                    <!-- add bio, profile image socials -->
+                    <!--  for socails make a a link and add a font awesome icon with ejs to pull socials -->
+                <!-- DOUBLE CHECK TO SEE IF CREATOR OR USER.BIO -->
+                    <p><%=creator.bio%></p>
+                    <!-- figure out html for adding phot, guessing i need a form  -->
+                </section>
+                <section>
+                    <h2>
+                        
+                    </h2>
+                    <%- include('../partials/imageUpload', { formAction: '/creator/imageUpload' }) %>
+                    
+                </section>
+                <section>
+                    <h2>Upcoming Events</h2>
+                    <!-- gallery of creations upload button  -->
+                </section>
+                <!-- figure out how to edit profile photo -->
+                <form action="/creator/edit?_method=PUT" method="POST">
+                    <input type="text" name="bio" value="<%=creator.bio%>" >
+                    <input type="text" name="location" value="<%=creator.location%>">
+                    <!-- craft selection -->
+                    <select name="craft" id="craft" required>
+                        <% crafts.forEach(c => { %>
+                            <!--  Tony edited, put in anki. This checks to see if the current logged in user's craft matches what is in the database if so it adds "selected"-->
+                            <option value="<%= c.name %>" <%= user.craft === c.name ? "selected" : "" %>><%= c.name %></option>
+                            <% }); %>
+                            <option value="Other" <%= creator.craft === "Other" ? "selected" : "" %>>Other</option>
+                        </select>
+                        <input type="text" name="instagram" value="<%=creator.instagram%>" >
+                        <input type="text" name="tiktok" value="<%=creator.tiktok%>" >
+                        <input type="text" name="website" value="<%=creator.website%>" >
+                        <!-- collab button -->
+                        <label>
+                            <input type="checkbox" name="readyToCollab" value="true" <%= creator.readyToCollab ? 'checked' : '' %> />
+                            Open to Collaboration
+                        </label>
+                        <input type="text" name="collabMethod" value="<%=creator.collabMethod%>">
+                    <button type="submit">Update</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+<%- include('../partials/footer') -%>
