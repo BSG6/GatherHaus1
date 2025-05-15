@@ -1,6 +1,46 @@
 <%- include('partials/header') -%>
 
-<main class="">
+    <main class="bg-gradient-to-b from-[#F6F3FF] to-[#FFFFFF]
+    min-h-screen p-8  py-10 px-6">
+        <section class="max-w-xl mx-auto bg-[#F9F9F9] border border-[#C1C1C1] rounded-xl p-8 shadow-md space-y-8">
+        
+        <h1 class="text-3xl font-extrabold text-[#7E5DFA] text-center"
+            style="text-shadow: 1px 1px 1px #C1C1C1;">
+            Create a New Event
+        </h1>
+    
+        <form action="/events" method="POST" class="space-y-8">
+            <!-- Title -->
+            <input type="text" name="title" placeholder="Event Title" required
+                class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]" />
+    
+            <!-- Description -->
+            <textarea name="description" placeholder="Details..." required
+                    class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md h-28 resize-none focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]"></textarea>
+    
+            <!-- Date -->
+            <input type="datetime-local" name="date" required
+                class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]" />
+    
+            <!-- Location -->
+            <input type="text" name="location" placeholder="Location" required
+                class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]" />
+    
+            <!-- Link -->
+            <input type="text" name="link" placeholder="Link to event (optional)"
+                class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]" />
+    
+            <!-- Button -->
+            <button type="submit"
+                    class="w-full mt-4 bg-[#7E5DFA] text-white font-bold py-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-[#6a49e0] shadow-md">
+            🚀 Create Event
+            </button>
+        </form>
+    
+        </section>
+    </main>
+  
+<!-- <main class="">
     <form action="/events" method="POST">
     <input type="text" name="title" placeholder="Event Title" required />
     <textarea name="description" placeholder="Details..." required></textarea>
@@ -10,7 +50,7 @@
     <button type="submit">Create Event</button>
 </form>
 </main>
-
+ -->
 
 <%- include('partials/footer') -%>
 

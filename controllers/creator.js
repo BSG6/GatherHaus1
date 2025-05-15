@@ -139,31 +139,49 @@ module.exports = {
     },
     getProfile: async (req, res) => {
         try {
-            const creator = await Creator.findById(req.params.id).lean();
+            const loggedInCreator = await Creator.findOne({ user: req.user._id }).lean();
+        
+            const creator = await Creator.findById(req.params.id)
+                .populate("likedBy")
+                .lean();
+        
             if (!creator) {
-                return res.status(404).render("404"); // optional: show friendly error
+                return res.status(404).render("404");
             }
-            const user = await User.findById(creator.user).lean()
+        
+            const user = await User.findById(creator.user).lean();
             const events = await Event.find().sort({ date: 1 }).lean();
-            // since profiles can be shared, and log in isnt required to view a profile; prevents the site from crashing if the link is bad
-            // creator is the profile youre viewing, user is the owner of that profile "creator.user" req.user is the viewer
-            res.render("profile", { creator, user, events, });
+        
+            res.render("profile", {
+                creator,
+                user,
+                events,
+                loggedInCreator: req.user, //USER!!!!
+            });
+        
             } catch (err) {
             console.log("err in getProfile", err);
-            }
+            res.status(404).render("404");
+        }
     },
-        createEvents: async (req, res) => {
-            try {
-            // Upload image to cloudinary
-            // const result = await cloudinary.uploader.upload(req.file.path);
-            const events = await Event.find();
-            // const creator = await Creator.findOne({ user: req.user._id })
-            // .populate("eventsAttending")
-            // .lean();
-            // const user = await User.findById(creator.user).lean()
-
-            const newEvent = await Event.create({
-                title: req.body.title,
+        // exports.getProfile = async (req, res) => {
+            //   const creator = await Creator.findOne({ userName: req.params.userName });
+            //   if (!creator) return res.status(404).send('Creator not found');
+            //   res.render('creator/profile', { creator });
+            // };
+            
+            createEvents: async (req, res) => {
+                try {
+                    // Upload image to cloudinary
+                    // const result = await cloudinary.uploader.upload(req.file.path);
+                    const events = await Event.find();
+                    // const creator = await Creator.findOne({ user: req.user._id })
+                    // .populate("eventsAttending")
+                    // .lean();
+                    // const user = await User.findById(creator.user).lean()
+                    
+                    const newEvent = await Event.create({
+                        title: req.body.title,
                 location: req.body.location,
                 description: req.body.description,
                 date: req.body.date,
@@ -180,14 +198,14 @@ module.exports = {
                 { $push: { eventsAttending: newEvent._id } }
             );
             // const events = await Event.find().sort({ date: 1 }).lean();
-
+            
             console.log("event has been added!", events);
             res.render("/creator/dasboard");
             } catch (err) {
-            console.log("err creating event",err);
+                console.log("err creating event",err);
             }
         },
-
+        
         getAllCreators:async (req, res) => {
             try {
                 const creators = await Creator.find().populate("user").lean();
@@ -199,6 +217,37 @@ module.exports = {
                     res.status(500).render("error");
             }
         },
+        
+        //   likePost: async (req, res) => {
+        //     try {
+        //       await Post.findOneAndUpdate(
+        //         { _id: req.params.id },
+        //         {
+        //           $inc: { likes: 1 },
+        //         }
+        //       );
+        //       console.log("Likes +1");
+        //       res.redirect(`/post/${req.params.id}`);
+        //     } catch (err) {
+        //       console.log(err);
+        //     }
+        //   },
+        likeCreator: async (req, res) => {
+            try {
+                await Creator.findByIdAndUpdate(
+                    req.params.id,
+                    {
+                    $inc: { likes: 1 },
+                    $push: { likedBy: req.user._id },
+                    }
+                );
+                console.log("Creator liked!");
+                res.redirect(`/creator/profile/${req.params.id}`);
+                } catch (err) {
+                console.log(err);
+                res.redirect("back");
+            }
+    },
 
     getPost: async (req, res) => {
         try {

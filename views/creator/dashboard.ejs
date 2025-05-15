@@ -1,43 +1,61 @@
 <%- include('../partials/header') -%>
 
-    <<div class="ml-64 min-h-screen bg-[#FFFFFF]">
-        <main class="max-w-5xl mx-auto pt-6 px-4 space-y-8">
+    <div class="min-h-screen p-8  bg-[#FFFFFF]">
+        <main class="max-w-10xl mx-auto pt-6 px-4 space-y-8">
     
         <!-- Welcome Header -->
         <section class="border-b border-[#C1C1C1] pb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-            <h1 class="text-4xl font-black text-[#1F1F1F]">Welcome, <%= user.userName %></h1>
-            <p class="text-sm text-gray-500">Location: <%= creator.location || "Not added" %></p>
+            <h1 class="text-5xl font-extrabold text-[#1F1F1F]"
+            style="text-shadow: 1px 1px 0 #191919c3">
+                Welcome, <%= user.userName %></h1>
+            <p class="text-xl text-[#1F1F1F]-500 font-bold my-4 ">Location: <%= creator.location || "Not added" %></p>
             </div>
             <% if (creator.profileImage) { %>
             <img src="<%= creator.profileImage %>" alt="Profile" class="w-20 h-20 object-cover rounded-full border border-[#C1C1C1] shadow-sm">
             <% } else { %>
-            <div class="w-20 h-20 rounded-full bg-gray-200 text-xs flex items-center justify-center text-gray-500">No Image</div>
+            <div class="w-20 h-20 rounded-full bg-gray-200 text-xs flex items-center justify-center text-gray-500"> pic</div>
             <% } %>
+        </section>
+        <section class="flex flex-wrap gap-4 pt-6 border-t2 border-[#C1C1C1] mt-6">
+            <a href="/creator/profile/<%= creator._id %>"
+            class="border-4 border-[#7e5dfa] text-[#1F1F1F] font-bold hover:bg-[#1F1F1F] hover:text-white px-4 py-2 rounded-md shadow-sm transition-all duration-200">
+            View Profile
+            </a>
+        
+            <a href="/creator/edit"
+            class="border-4 border-[#1F1F1F] text-[#1F1F1F] font-bold hover:bg-[#1F1F1F] hover:text-white px-4 py-2 rounded-md shadow-sm transition-all duration-200">
+            Edit Profile
+            </a>
+        
+            <a href="/creator/collab"
+            class="border-4 border-[#7E5DFA] text-[#1F1F1F] font-bold hover:bg-[#1F1F1F] hover:text-white px-4 py-2 rounded-md shadow-sm transition-all duration-200">
+            Collab With Others
+            </a>
         </section>
     
         <!-- About You -->
-        <section class="bg-white border border-[#C1C1C1] rounded-lg p-6 shadow-sm space-y-4">
-            <h2 class="text-2xl font-semibold text-[#000000] border-b border-[#C1C1C1] pb-2">About You</h2>
-            <p><%= creator.bio || "No bio yet." %></p>
-            <div class="text-sm text-[#1F1F1F] space-y-1">
-            <p><strong>Craft:</strong> <%= creator.craft || "Not specified" %></p>
-            <p><strong>Ready to Collab:</strong> <%= creator.readyToCollab ? "Yes ✅" : "No ❌" %></p>
+        <section class="bg-[#F9F9F9] border border-[#C1C1C1] rounded-lg p-6 shadow-sm space-y-4">
+            <h2 class="text-3xl font-semibold text-[#000000] border-b border-[#C1C1C1] pb-2">Bio</h2>
+            <p class="text-lg"><%= creator.bio || "No bio yet." %></p>
+            <div class="text-md text-[#1F1F1F] space-y-1">
+            <p class=" inline text-2xl font-bold">Craft: <p class="inline font-bold"><%= creator.craft || "Not specified" %></p></p>
+            <p class=" inline text-2xl font-bold">Ready to Collab: <p class="inline font-bold"> <%= creator.readyToCollab ? "Yes ✅" : "No ❌" %></p></p>
             </div>
         </section>
     
         <!-- Social Links -->
-        <section class="bg-white border border-[#C1C1C1] rounded-lg p-6 shadow-sm space-y-4">
-            <h2 class="text-2xl font-semibold text-[#000000] border-b border-[#C1C1C1] pb-2">Social Links</h2>
+        <section class="bg-[#F9F9F9] border border-[#C1C1C1] rounded-lg p-6 shadow-sm space-y-4">
+            <h2 class="text-3xl font-semibold text-[#000000] border-b border-[#C1C1C1] pb-2">Social Links</h2>
             <ul class="text-sm space-y-2">
             <% if (creator.instagram) { %>
-                <li><a href="<%= creator.instagram %>" target="_blank" class="text-[#1F1F1F] font-semibold hover:text-[#7E5DFA] hover:underline"><i class="fab fa-instagram"></i> Instagram</a></li>
+                <li><a href="<%= creator.instagram %>" target="_blank" class="text-lg text-[#1F1F1F] font-semibold hover:text-[#7E5DFA] hover:underline"><i class="fab fa-instagram"></i> Instagram</a></li>
             <% } %>
             <% if (creator.tiktok) { %>
-                <li><a href="<%= creator.tiktok %>" target="_blank" class="text-[#1F1F1F] font-semibold hover:text-[#7E5DFA] hover:underline"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                <li><a href="<%= creator.tiktok %>" target="_blank" class="text-lg text-[#1F1F1F] font-semibold hover:text-[#7E5DFA] hover:underline"><i class="fab fa-tiktok"></i> TikTok</a></li>
             <% } %>
             <% if (creator.website) { %>
-                <li><a href="<%= creator.website %>" target="_blank" class="text-[#1F1F1F] font-semibold hover:text-[#7E5DFA] hover:underline"><i class="fas fa-globe"></i> Website</a></li>
+                <li><a href="<%= creator.website %>" target="_blank" class="text-lg text-[#1F1F1F] font-semibold hover:text-[#7E5DFA] hover:underline"><i class="fas fa-globe"></i> Website</a></li>
             <% } %>
             <% if (!creator.instagram && !creator.tiktok && !creator.website) { %>
                 <li class="text-gray-400">No social links provided.</li>
@@ -47,7 +65,7 @@
     
         <!-- Talents / Gallery -->
         <section class="bg-[#F9F9F9] border border-[#C1C1C1] rounded-lg p-6 shadow-inner space-y-4">
-            <h2 class="text-2xl font-semibold text-[#000000] border-b border-[#C1C1C1] pb-2">My Talents</h2>
+            <h2 class="text-3xl font-semibold text-[#000000] border-b border-[#C1C1C1] pb-2">My Talents</h2>
             <% if (creator.images && creator.images.length > 0) { %>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <% creator.images.forEach(image => { %>
@@ -64,32 +82,23 @@
         </section>
     
         <!-- Events Section -->
-        <section class="bg-[#F6F3FF] border border-[#C1C1C1] rounded-lg p-6 shadow-sm space-y-4">
-            <h2 class="text-2xl font-semibold text-[#1F1F1F] border-b border-[#C1C1C1] pb-2">My Events</h2>
-            <%- include('../partials/displayEvent', { events }) %>
+    <section class="bg-[#F9F9F9] mb-auto border border-[#C1C1C1] rounded-lg p-6 shadow-sm space-y-4">
+        <div>
+
+            <h2 class=" inline text-3xl font-semibold text-[#000000] border-b border-[#C1C1C1] pb-2">
+                My Events
+            </h2>
             <a href="/events/add"
-            class="inline-block mt-2 border-2 border-[#7E5DFA] text-[#7E5DFA] font-bold hover:bg-[#7E5DFA] hover:text-white px-5 py-2 rounded-md transition-all duration-200">
+            class=" inline  mt-2 border-2 border-[#7E5DFA] text-[#1F1F1F] font-bold hover:bg-[#7E5DFA] hover:text-white px-5 py-2 rounded-md shadow-sm hover:shadow-md transition-all duration-200 ml-12 ">
             + Add Event
             </a>
-        </section>
+        </div>
     
-        <!-- Bottom Actions -->
-        <section class="flex flex-wrap gap-4 pt-4 border-t border-[#C1C1C1]">
-            <a href="/creator/profile/<%= creator._id %>"
-            class="border-2 border-[#5FC4B6] text-[#5FC4B6] font-bold hover:bg-[#5FC4B6] hover:text-white px-4 py-2 rounded-md transition-all duration-200">
-            View Profile
-            </a>
-            <a href="/creator/edit"
-            class="border-2 border-[#1F1F1F] text-[#1F1F1F] font-bold hover:bg-[#1F1F1F] hover:text-white px-4 py-2 rounded-md transition-all duration-200">
-            Edit Profile
-            </a>
-            <a href="/creator/collab"
-            class="border-2 border-[#7E5DFA] text-[#7E5DFA] font-bold hover:bg-[#7E5DFA] hover:text-white px-4 py-2 rounded-md transition-all duration-200">
-            Collab With Others
-            </a>
-        </section>
+        <%- include('../partials/displayEvent', { events }) %>
     
-        </main>
-    </div>
-  
+    </section>
+    
+    <!-- Bottom Actions -->
+    
+
 <%- include('../partials/footer') -%>

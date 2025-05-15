@@ -25,6 +25,11 @@ router.get("/collab",ensureAuth, creatorController.getAllCreators);
 // creator profile? do i need this??
 router.get("/:id", creatorController.getProfile)
 
+
+router.get('/profile/:id', creatorController.getProfile);
+router.post("/like/:id", ensureAuth, creatorController.likeCreator);
+
+
 //Post Routes - simplified for now
 // router.get("/:id", ensureAuth, creatorController.getCreator);
 

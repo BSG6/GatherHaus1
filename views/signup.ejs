@@ -1,53 +1,90 @@
 <%- include('partials/header') -%>
-    <main class="ml-64 p-8 flex flex-col items-center justify-center min-h-screen">
-        <div class="row justify-content-center">
-            <section class="col-6 mt-5">
-                <% if (locals.messages.errors) { %>
-                    <% messages.errors.forEach( el => { %>
-                        <div class="alert alert-danger"><%= el.msg %></div>
-                    <% }) %>    
-                <% } %>
-                <% if (locals.messages.info) { %>
-                    <% messages.info.forEach( el => { %>
-                        <div class="alert alert-info"><%= el.msg %></div>
-                    <% }) %>    
-                <% } %>
-                <form action="/signup" method="POST">
-                    <div class="mb-3">
-                        <label for="userName" class="form-label">User Name or Company</label>
-                        <input type="text" class="form-control" id="userName" name="userName">
-                      </div>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                      <label for="password" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password" name="password">
-                    </div>
-                    <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-                      </div>
-                      <div class="form-text">Account type</div>
-                      <div>
-                        <!-- creator -->
-                        <label for="Creator">Creator or Small Business Owner</label>
-                        <input type="radio" id="creator" name="accountType" value="creator" required checked>
-                        <!-- Host -->
-                        <label for="Host">Event Curator</label>
-                        <input type="radio" id="host" name="accountType" value="host" required >
-                        <!-- influencer -->
-                        <label for="influencer">Influencer</label>
-                        <input type="radio" id="influencer" name="accountType" value="influencer" required >
+<main class="min-h-screen p-8  flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#F6F3FF] to-[#FFFFFF]">
+  <div class="w-full max-w-xl bg-white border border-[#C1C1C1] rounded-xl shadow-md p-8 space-y-6">
 
-                      </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+    <!-- Page Title -->
+    <h1 class="text-3xl font-extrabold text-center text-[#7E5DFA]" style="text-shadow: 1px 1px #C1C1C1;">
+      🪄 Create Your Account
+    </h1>
 
-                  </form>
-            </section>
+    <!-- Signup Form -->
+    <form action="/signup" method="POST" class="space-y-5">
+
+      <!-- Username -->
+      <div>
+        <label for="userName" class="block text-sm font-semibold text-[#1F1F1F] mb-1">🧑‍💼 User Name or Company</label>
+        <input type="text" id="userName" name="userName" required
+              class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]" />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-semibold text-[#1F1F1F] mb-1">📧 Email Address</label>
+        <input type="email" id="email" name="email" required
+              class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]" />
+        <p class="text-xs text-gray-500 mt-1">We’ll never share your email with anyone else.</p>
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-sm font-semibold text-[#1F1F1F] mb-1">🔒 Password</label>
+        <input type="password" id="password" name="password" required
+              class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]" />
+      </div>
+
+      <!-- Confirm Password -->
+      <div>
+        <label for="confirmPassword" class="block text-sm font-semibold text-[#1F1F1F] mb-1">🔒 Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required
+              class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]" />
+      </div>
+
+      <!-- Account Type Selection -->
+      <div class="space-y-2 mt-4">
+        <p class="text-sm font-semibold text-[#1F1F1F] mb-2">✨ Select your account type:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+          <!-- Creator -->
+          <label for="creator"
+                class="flex items-center gap-3 border-2 rounded-lg px-4 py-3 cursor-pointer transition-all duration-200
+                        text-[#1F1F1F] border-[#C1C1C1] hover:border-[#7E5DFA] hover:shadow-md peer-checked:border-[#7E5DFA] peer-checked:bg-[#F6F3FF]">
+            <input type="radio" id="creator" name="accountType" value="creator" class="peer hidden" checked required>
+            <i class="fas fa-paint-brush text-[#7E5DFA]"></i>
+            <span class="text-sm font-semibold">Creator / Small Biz</span>
+          </label>
+<!-- 
+          Host
+          <label for="host"
+                class="flex items-center gap-3 border-2 rounded-lg px-4 py-3 cursor-pointer transition-all duration-200
+                        text-[#1F1F1F] border-[#C1C1C1] hover:border-[#7E5DFA] hover:shadow-md peer-checked:border-[#7E5DFA] peer-checked:bg-[#F6F3FF]">
+            <input type="radio" id="host" name="accountType" value="host" class="peer hidden" required>
+            <i class="fas fa-calendar-alt text-[#7E5DFA]"></i>
+            <span class="text-sm font-semibold">Event Curator</span>
+          </label>
+
+          Influencer
+          <label for="influencer"
+              class="flex items-center gap-3 border-2 rounded-lg px-4 py-3 cursor-pointer transition-all duration-200
+                        text-[#1F1F1F] border-[#C1C1C1] hover:border-[#7E5DFA] hover:shadow-md peer-checked:border-[#7E5DFA] peer-checked:bg-[#F6F3FF]">
+            <input type="radio" id="influencer" name="accountType" value="influencer" class="peer hidden" required>
+            <i class="fas fa-bolt text-[#7E5DFA]"></i>
+            <span class="text-sm font-semibold">Influencer</span>
+          </label> -->
+
         </div>
-    </main>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit"
+              class="w-full bg-[#7E5DFA] text-white font-bold py-3 rounded-md mt-4 shadow-md
+                    hover:bg-[#6844e0] hover:scale-105 transition-all duration-300">
+        🚀 Submit
+      </button>
+    </form>
+  </div>
+</main>
+
+</div>
+
 
 <%- include('partials/footer') -%>

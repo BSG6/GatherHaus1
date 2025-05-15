@@ -71,6 +71,15 @@ const CreatorSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    likes: {
+        type: Number, default: 0
+    },
+    likedBy: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "User" 
+    }]
+
+    
 });
 
 module.exports = mongoose.model("Creator", CreatorSchema);

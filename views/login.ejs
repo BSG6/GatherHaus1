@@ -1,40 +1,61 @@
 <%- include('partials/header') -%>
 
-<main class="">
-  <div class="row justify-content-center">
-    <section class="col-6 mt-5">
-      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-      <div class="alert alert-danger"><%= el.msg %></div>
-      <% }) %> <% } %> <% if (locals.messages.info) { %> <%
-      messages.info.forEach( el => { %>
-      <div class="alert alert-info"><%= el.msg %></div>
-      <% }) %> <% } %>
-      <form action="/login" method="POST">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            name="email"
-          />
+<main class="min-h-screen p-8  bg-gradient-to-b from-[#F6F3FF] to-[#FFFFFF] flex items-center justify-center px-6 py-12">
+  <section class="w-full max-w-md bg-white border border-[#C1C1C1] rounded-xl shadow-md p-8 space-y-6">
+
+    <!-- Flash Messages -->
+    <% if (locals.messages.errors) { %>
+      <% messages.errors.forEach(el => { %>
+        <div class="bg-red-100 text-red-700 px-4 py-2 rounded-md text-sm font-semibold shadow-sm">
+          <%= el.msg %>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            name="password"
-          />
+      <% }) %>
+    <% } %>
+
+    <% if (locals.messages.info) { %>
+      <% messages.info.forEach(el => { %>
+        <div class="bg-blue-100 text-blue-700 px-4 py-2 rounded-md text-sm font-semibold shadow-sm">
+          <%= el.msg %>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </section>
-  </div>
+      <% }) %>
+    <% } %>
+
+    <!-- Title -->
+    <h1 class="text-3xl font-extrabold text-center text-[#7E5DFA]" style="text-shadow: 1px 1px #C1C1C1;">
+      Login to Your Account
+    </h1>
+
+    <!-- Login Form -->
+    <form action="/login" method="POST" class="space-y-4">
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-semibold text-[#1F1F1F] mb-1">📧 Email Address</label>
+        <input type="email" name="email" id="email" required
+              class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md focus:ring-2 focus:ring-[#7E5DFA] focus:outline-none" />
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-sm font-semibold text-[#1F1F1F] mb-1">🔒 Password</label>
+        <input type="password" name="password" id="password" required
+              class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md focus:ring-2 focus:ring-[#7E5DFA] focus:outline-none" />
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit"
+              class="w-full bg-[#7E5DFA] text-white font-bold py-3 rounded-md mt-2 shadow-md
+                    hover:bg-[#6844e0] hover:scale-105 transition-all duration-300">
+        🚀 Submit
+      </button>
+    </form>
+
+    <!-- Optional -->
+    <p class="text-center text-sm text-gray-500">
+      Don’t have an account? <a href="/signup" class="text-[#7E5DFA] font-semibold hover:underline">Sign up</a>
+    </p>
+  </section>
 </main>
+
 
 <%- include('partials/footer') -%>

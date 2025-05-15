@@ -1,10 +1,28 @@
-<main class="">
-    <form action="<%= formAction %>" method="POST" enctype="multipart/form-data">
-        <label for="image">Please upload your images</label>
-    <input type="file" name="image" accpet="image/*">
-    <button type="submit">Upload Image</button>
-</form>
+<main class="bg-white p-6 rounded-lg shadow-md border border-[#C1C1C1] max-w-xl mx-auto">
+    <form action="<%= formAction %>" method="POST" enctype="multipart/form-data" class="space-y-5">
+        
+        <!-- Label -->
+        <label for="image" class="block hover:rotate-3 text-lg font-semibold text-[#1F1F1F]">
+            📷 Upload Your Art or Profile Image
+        </label>
+    
+        <!-- File Input -->
+        <input type="file" name="image" accept="image/*"
+                class="block w-full text-[#1F1F1F] file:mr-4 file:py-2 file:px-4
+                        file:rounded-md file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-[#7E5DFA] file:text-white
+                        hover:file:bg-[#6844e0] transition-all duration-200" />
+    
+        <!-- Submit Button -->
+        <button type="submit"
+                class="w-full bg-[#7E5DFA] text-white font-bold py-2 px-4 rounded-md
+                        hover:bg-[#6844e0] hover:scale-105 transition-all duration-300">
+            🚀 Upload Image
+        </button>
+    </form>
 </main>
+    
 
 
 

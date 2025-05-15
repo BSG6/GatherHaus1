@@ -1,4 +1,7 @@
-/*! tailwindcss v4.1.6 | MIT License | https://tailwindcss.com */
+h1{
+  color:red;
+}
+
 @layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
@@ -116,7 +119,6 @@
   }
   img, svg, video, canvas, audio, iframe, embed, object {
     display: block;
-    vertical-align: middle;
   }
   img, video {
     max-width: 100%;

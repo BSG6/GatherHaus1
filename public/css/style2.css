@@ -1,6 +1,6 @@
-html, body {
+/* html, body { */
   
-    display: flex;
+    /* display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
@@ -14,14 +14,14 @@ html, body {
     display: block;
     margin: 1rem auto;        
     max-width: 200px;         
-    width: 100%;
-    height: auto;
+    width: 100%; */
+    /* height: auto;
     border-radius: 8px;        
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  
   }
   main {
     /* margin-top: 80px; */
-   
+/*    
   }
   form {
     max-width: 500px;
@@ -37,9 +37,9 @@ html, body {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
-  }
+  } */
   
-  form input,
+  /* form input,
   form textarea,
   form select {
     width: 100%;
@@ -59,36 +59,36 @@ html, body {
     left: 0;
     width: 100%;
     background-color: #1f293707; /* dark gray */
-    padding: 1rem 2rem;
+    /* padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  nav a {
+  } */
+   /* */
+  /* nav a {
     color: white;
     text-decoration: none;
     /* margin: 0 1rem; */
-    font-weight: 600;
+    /* font-weight: 600;
     transition: color 0.2s ease;
-  }
+  }  
   
   nav a:hover {
-    color: #60a5fa; /* light blue on hover */
+    color: #60a5fa; 
   }
   h1 {
     font-size: 2.5rem;
     font-weight: 700;
     text-align: center;
-    color: #e7edf5; /* dark gray */
+    color: #e7edf5; 
     margin-bottom: 1rem;
     line-height: 1.2;
     letter-spacing: -0.5px;
   }
   button {
-  background-color: #4f46e5;     /* indigo */
+  background-color: #4f46e5;    
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
@@ -101,7 +101,7 @@ html, body {
 }
 
 button:hover {
-  background-color: #4338ca;     /* darker indigo */
+  background-color: #4338ca;    
 }
 
 button:active {
@@ -114,7 +114,7 @@ button:disabled {
   opacity: 0.6;
 }
 h2 {
-    color: #f9fafb;               /* light gray text */
+    color: #f9fafb;              
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 1rem;
@@ -122,8 +122,7 @@ h2 {
     line-height: 1.3;
     letter-spacing: 0.5px;
   }
-  p {
-    color: #d1d5db; /* slightly softer gray */
+
     font-size: 1rem;
     line-height: 1.7;
     font-style: normal;
@@ -132,8 +131,7 @@ h2 {
   
   }a {
     display: inline-block;
-    background-color: #4f46e5;   /* indigo */
-    color: white;
+    background-color: #4f46e5;   
     padding: 0.6rem 1.25rem;
     border-radius: 8px;
     text-decoration: none;
@@ -145,9 +143,9 @@ h2 {
   }
   
   a:hover {
-    background-color: #4338ca;   /* darker indigo */
+    background-color: #4338ca;   
   }
   
   a:active {
     transform: scale(0.97);
-  }
+  }  */
