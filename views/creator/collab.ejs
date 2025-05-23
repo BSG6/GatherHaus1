@@ -1,0 +1,67 @@
+
+<%- include('../partials/header') -%>
+    <div class="min-h-screen p-8 bg-white">
+        <main class="max-w-6xl mx-auto py-8 px-6 space-y-10">
+    
+        <!-- Header -->
+        <h1 class="text-4xl font-extrabold text-[#7E5DFA] border-b border-[#C1C1C1] pb-4">
+            Find Collaborators
+        </h1>
+        <p class="text-[#1F1F1F] max-w-2xl text-base font-medium">
+            Connect with creators who are open to collaboration. Use this space to explore crafts and build together.
+        </p>
+    
+        <!-- Creator Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% creators.forEach(creator => { %>
+            <% if (creator.readyToCollab) { %>
+                <div class="bg-[#F9F9F9] border border-[#C1C1C1] rounded-lg shadow-sm p-6 space-y-3
+                            transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-[#7E5DFA]">
+    
+                <!-- Name -->
+                <h3 class="text-xl font-extrabold text-[#7E5DFA] tracking-wide">
+                    <%= creator.name %>
+                </h3>
+                
+                <!-- Bio -->
+                <% if (creator.bio) { %>
+                    <p class="text-sm text-gray-600 leading-snug">
+                    <%= creator.bio.substring(0, 100) %>...
+                    </p>
+                <% } %>
+    
+                <!-- Craft + Location -->
+                <div class="space-y-1 text-sm text-[#1F1F1F]">
+                    <p><span class="font-semibold">Craft:</span> <%= creator.craft || "N/A" %></p>
+                    <p><span class="font-semibold">Location:</span> <%= creator.location || "N/A" %></p>
+                </div>
+    
+                <!-- Tag -->
+                <!-- <span class="inline-block text-xs font-semibold text-[#7E5DFA] bg-[#F3F0FF] px-2 py-1 rounded-full">
+                    Open to Collaborate
+                </span> -->
+                <% if (creator.readyToCollab) { %>
+                    <span class="inline-block text-xs font-semibold text-[#7E5DFA] bg-[#F3F0FF] px-2 py-1 rounded-full">
+                        Open to Collaborate
+                        </span>
+                    
+                <% } %>
+                <!-- View Profile Button -->
+                <a href="/creator/profile/<%= creator._id %>"
+                    class="inline-block mt-4 border-2 border-[#7E5DFA] text-[#1F1F1F] font-bold 
+                        hover:bg-[#7E5DFA] hover:text-white px-4 py-2 rounded-md 
+                        transition-all duration-200 hover:scale-105">
+                    View Profile
+                </a>
+    
+                </div>
+            <% } %>
+            <% }) %>
+        </div>
+    
+        </main>
+    </div>
+    
+
+
+<%- include('../partials/footer') -%>

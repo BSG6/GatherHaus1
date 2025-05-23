@@ -1,0 +1,57 @@
+<%- include('../partials/header') -%>
+<main class="min-h-screen bg-gradient-to-b from-[#F6F3FF] to-[#FFFFFF] px-6 py-12 flex justify-center items-center">
+    <div class="w-full max-w-xl bg-white border border-[#C1C1C1] rounded-xl shadow-md p-8 space-y-6">
+  
+        <!-- Heading -->
+        <h1 class="text-3xl font-extrabold text-center text-[#7E5DFA]" style="text-shadow: 1px 1px #C1C1C1;">
+            🌿 Tell Us About Yourself
+        </h1>
+    
+        <!-- Onboarding Form -->
+        <form action="/creator/onboarding" method="POST" class="space-y-5">
+
+        <!-- Bio -->
+        <div>
+            <label for="bio" class="block text-sm font-semibold text-[#1F1F1F] mb-1">📝 Bio</label>
+            <textarea name="bio" id="bio" placeholder="Tell us about yourself"
+                    class="w-full h-28 px-4 py-2 border border-[#C1C1C1] rounded-md resize-none 
+                            focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]"></textarea>
+        </div>
+
+        <!-- Instagram -->
+        <div>
+            <label for="instagram" class="block text-sm font-semibold text-[#1F1F1F] mb-1">📸 Instagram</label>
+            <input type="text" name="instagram" id="instagram" placeholder="@yourhandle"
+                    class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md 
+                            focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]" />
+        </div>
+
+        <!-- TikTok -->
+        <div>
+            <label for="tiktok" class="block text-sm font-semibold text-[#1F1F1F] mb-1">🎵 TikTok</label>
+            <input type="text" name="tiktok" id="tiktok" placeholder="@yourtiktok"
+                    class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md 
+                        focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]" />
+        </div>
+
+    <!-- Website -->
+        <div>
+            <label for="website" class="block text-sm font-semibold text-[#1F1F1F] mb-1">🌐 Website</label>
+            <input type="text" name="website" id="website" placeholder="yourwebsite.com"
+                    class="w-full px-4 py-2 border border-[#C1C1C1] rounded-md 
+                        focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]" />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+                class="w-full bg-[#7E5DFA] text-white font-bold py-3 rounded-md mt-2 shadow-md 
+                    hover:bg-[#6844e0] hover:scale-105 transition-all duration-300">
+            ✅ Finish Setup
+        </button>
+
+        </form>
+    </div>
+  </main>
+  
+
+<%- include('../partials/footer') -%>

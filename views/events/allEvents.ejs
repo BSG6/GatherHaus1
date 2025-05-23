@@ -1,0 +1,41 @@
+<%- include('../partials/header') -%>
+<body class="bg-white text-[#1F1F1F]">
+    <main class="min-h-screen p-8 min-h-screen px-6 py-10 max-w-6xl mx-auto space-y-10">
+    
+        <!-- Page Heading -->
+        <h1 class="text-4xl font-extrabold text-[#7E5DFA] border-b border-[#C1C1C1] pb-4" style="text-shadow: 1px 1px #C1C1C1;">
+            🌟 All Events
+        </h1>
+    
+        <!-- No Events Message -->
+        <% if (events.length === 0) { %>
+            <p class="text-lg text-gray-500 text-center italic">No events found. Be the first to add something beautiful ✨</p>
+        
+        <% } else { %>
+            <!-- Events Grid -->
+            <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+            <% events.forEach(event => { %>
+                <div class="bg-[#F9F9F9] border border-[#C1C1C1] rounded-lg p-6 shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-200 space-y-2">
+                
+                <h3 class="text-xl font-bold text-[#7E5DFA] tracking-wide"><%= event.title %></h3>
+    
+                <p class="text-sm"><strong>📍 Location:</strong> <%= event.location %></p>
+                <p class="text-sm"><strong>📅 Date:</strong> <%= new Date(event.date).toLocaleDateString() %></p>
+                <p class="text-sm text-gray-700"><%= event.description %></p>
+    
+                <% if (event.link) { %>
+                    <a href="<%= event.link %>" target="_blank"
+                    class="inline-block text-sm text-[#7E5DFA] font-semibold hover:underline">
+                    🔗 Event Link
+                    </a>
+                <% } %>
+                </div>
+            <% }) %>
+            </div>
+        <% } %>
+    
+    </main>
+</body>
+  
+
+<%- include('../partials/footer') -%>

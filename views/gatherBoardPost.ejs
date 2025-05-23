@@ -1,0 +1,117 @@
+
+
+
+
+<%- include('partials/header') %>
+<section class="max-w-4xl mx-auto mt-12 px-4 md:px-6">
+  <h1 class="text-5xl font-extrabold text-[#1F1F1F] mb-4" style="text-shadow: 1px 1px 0 #191919c3;">📝 Post to the Gather Board</h1>
+  <p class="text-xl text-[#1F1F1F] font-semibold mb-8">Let your community know what you're seeking — collabs, vendors, creatives, or support.</p>
+
+  <form action="/post/createPost" method="POST" enctype="multipart/form-data" class="space-y-6 bg-[#F9F9F9] border border-[#C1C1C1] rounded-xl shadow-md p-8">
+    <input type="hidden" name="postType" value="gatherBoard" />
+
+    <!-- Title -->
+    <div>
+      <label for="title" class="block text-md text-[#1F1F1F] font-bold mb-2">Title</label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        required
+        placeholder="What are you looking for?"
+        class="w-full bg-white text-[#1F1F1F] border border-[#C1C1C1] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]"
+      />
+    </div>
+
+    <!-- Caption -->
+    <div>
+      <label for="caption" class="block text-md text-[#1F1F1F] font-bold mb-2">Details</label>
+      <textarea
+        name="caption"
+        id="caption"
+        required
+        placeholder="Details, dates, links, etc..."
+        class="w-full bg-white text-[#1F1F1F] border border-[#C1C1C1] rounded-lg px-4 py-3 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]"
+      ></textarea>
+    </div>
+
+    <!-- Location -->
+    <div>
+      <label for="location" class="block text-md text-[#1F1F1F] font-bold mb-2">Location</label>
+      <input
+        required
+        type="text"
+        name="location"
+        id="location"
+        placeholder="City, State"
+        class="w-full bg-white text-[#1F1F1F] border border-[#C1C1C1] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]"
+      />
+    </div>
+
+    <!-- Willing to Travel Checkbox -->
+    <div class="flex items-center space-x-2">
+      <input
+        
+        type="checkbox"
+        name="willingToTravel"
+        id="willingToTravel"
+        class="h-5 w-5 text-[#7E5DFA] focus:ring-[#91DBD1] border-[#C1C1C1] rounded"
+      />
+      <label for="willingToTravel" class="text-[#1F1F1F] font-medium">I’m willing to travel</label>
+    </div>
+
+    <!-- Collab Type -->
+    <div>
+      <label for="collabType" class="block text-md text-[#1F1F1F] font-bold mb-2">Preferred Collab Type</label>
+      <select
+      required
+        name="collabType"
+        id="collabType"
+        class="w-full bg-white text-[#1F1F1F] border border-[#C1C1C1] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]"
+      >
+        <option value="">Select a collab type (optional)</option>
+        <option value="vendor">Vendor Pop-up</option>
+        <option value="photoshoot">Photoshoot</option>
+        <option value="content">Content Creation</option>
+        <option value="live">IG Live or Virtual Collab</option>
+        <option value="custom">Custom</option>
+      </select>
+    </div>
+
+    <!-- Available Until -->
+    <div>
+      <label for="availableUntil" class="block text-md text-[#1F1F1F] font-bold mb-2">Available Until</label>
+      <input
+      required
+        type="date"
+        name="availableUntil"
+        id="availableUntil"
+        class="w-full bg-white text-[#1F1F1F] border border-[#C1C1C1] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#7E5DFA]"
+      />
+    </div>
+    <!-- photo upload -->
+    <label for="image" class="block hover:rotate-3 text-lg font-semibold text-[#1F1F1F]">
+      📷 Upload Gallery Images
+  </label>
+
+  <!-- File Input -->
+  <input type="file" name="image" accept="image/*"
+          class="block w-full text-[#1F1F1F] file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-[#7E5DFA] file:text-white
+                  hover:file:bg-[#6844e0] transition-all duration-200" />
+
+    <!-- Submit -->
+    <div>
+      <button
+        type="submit"
+        class="w-full bg-[#7E5DFA] text-white font-bold py-3 rounded-lg hover:bg-[#1F1F1F] hover:text-white transition duration-200"
+      >
+        Post to Board
+      </button>
+    </div>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

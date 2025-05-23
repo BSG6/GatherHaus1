@@ -1,0 +1,157 @@
+<%- include('partials/header') -%>
+<main class="min-h-screen p-8  px-6 py-10 bg-gradient-to-b from-[#F6F3FF] to-[#FFFFFF]">
+  <div class="max-w-4xl mx-auto space-y-8">
+
+    <!-- Profile Header -->
+    <section class="flex flex-col gap-2">
+      <h1 class="text-4xl font-extrabold text-[#7E5DFA] tracking-tight" style="text-shadow: 1px 1px #C1C1C1;">
+        <!-- to display name -->
+        <% if (user && creator.user && user._id.toString() === creator.user._id.toString()) { %>
+          <%= `${user.userName}'s Profile` %>
+        <% } else { %>
+          <%= `${creator.name}'s Profile` %>
+        <% } %>
+        <!--  likes counter -->
+        <div class="flex items-center gap-2 text-[#1F1F1F] font-semibold text-sm mt-2">
+          <span id="heart" class="transition-transform duration-300 ease-in-out">❤️</span>
+          <span><%= creator.likes %> like<%= creator.likes === 1 ? '' : 's' %></span>
+        </div>
+      </h1>
+        <!-- back to dashboard link -->
+      <% if (user.accountType === "creator") { %>
+        <a href="/creator/dashboard" class="text-md text-[#1F1F1F] hover:underline">← Back to Dashboard</a>
+      <% } else if (user.accountType === "host") { %>
+        <a href="/host/dashboard" class="text-md text-[#1F1F1F] hover:underline">← Back to Dashboard</a>
+      <% } else if (user.accountType === "influencer") { %>
+        <a href="/influencer/dashboard" class="text-md text-[#1F1F1F] hover:underline">← Back to Dashboard</a>
+      <% } %>
+      <a href="/creator/collab" class="text-md text-[#1F1F1F] hover:underline">← Back to Collab</a>
+    </section>
+    <!-- profile photo -->
+
+    <section class="bg-white p-6 rounded-lg border border-[#C1C1C1] shadow-sm space-y-3">
+    
+    <% if (creator.profileImage && creator.profileImage.url) { %>
+    <img src="<%= creator.profileImage.url %>" alt="Profile" class="w-60 h-60 object-cover rounded-full border border-[#C1C1C1] shadow-sm">
+    <% } else { %>
+    <div class="w-20 h-20 rounded-full bg-gray-200 text-xs flex items-center justify-center text-gray-500"> pic</div>
+    <% } %>
+    <div class="text-md text-[#1F1F1F] space-y-1">
+      <h3 class="text-3xl font-extrabold text-[#7E5DFA] tracking-wide ">
+        <%= creator.name %>
+    </h3>
+    <div class="h-[2px] w-1/2 bg-gradient-to-r from-[#7E5DFA] to-transparent mt-2 mb-4"></div>
+      <p class=" inline text-2xl font-bold">Craft: <p class="inline font-bold"><%= creator.craft || "Not specified" %></p></p>
+      <!-- <p class=" inline text-2xl font-bold">Ready to Collab: <p class="inline font-bold"> <%= creator.readyToCollab ? "Yes ✅" : "No ❌" %></p></p>
+      </div> -->
+    <span class="<%= creator.readyToCollab ? 'text-green-600 font-bold' : 'text-gray-400' %>">
+      <%= creator.readyToCollab ? "Open to Collaborate ✅" : "Not Currently Open ❌" %>
+    </span>
+    </section>
+    <!-- Bio + Details -->
+    <section class="bg-white p-6 rounded-lg border border-[#C1C1C1] shadow-sm space-y-3">
+      <% if (creator.bio) { %>
+        <h2 class="text-3xl font-semibold text-[#000000] border-b border-[#C1C1C1] pb-2">Bio</h2>
+        <p class="text-lg"><%= creator.bio || "No bio yet." %></p>      <% } %>
+        
+      </p>
+    </section>
+
+
+    <% if (creator.likedBy && creator.likedBy.includes(loggedInCreator._id)) { %>
+      <button disabled class="mt-4 bg-green-100 text-green-800 font-semibold px-4 py-2 rounded-md cursor-not-allowed">
+        ✅ You liked this creator
+      </button>
+    <% } else { %>
+      <form action="/creator/like/<%= creator._id %>" method="POST">
+        <button type="submit"
+          class="mt-4 border-2 border-[#7E5DFA] text-[#1F1F1F] font-bold px-4 py-2 rounded-md 
+                hover:bg-[#7E5DFA] hover:text-white transition-all duration-200">
+          🤝 Interested in Collaborating
+        </button>
+      </form>
+    <% } %>
+    
+    
+    
+    <!-- Socials -->
+    <section class="bg-white p-6 rounded-lg border border-[#C1C1C1] shadow-sm">
+      <h2 class="text-2xl font-semibold mb-4">🔗 Social Links</h2>
+      <ul class="space-y-2 text-sm">
+        <li>
+          
+          <% if (creator.instagram) { %>
+            <a href="<%= creator.instagram %>" target="_blank" class="text-[#7E5DFA] font-semibold hover:underline">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+          <% } else { %>
+            <span class="text-gray-400"><i class="fab fa-instagram"></i> Not provided</span>
+          <% } %>
+        </li>
+        <li>
+          <% if (creator.tiktok) { %>
+            <a href="<%= creator.tiktok %>" target="_blank" class="text-[#7E5DFA] font-semibold hover:underline">
+              <i class="fab fa-tiktok"></i> TikTok
+            </a>
+          <% } else { %>
+            <span class="text-gray-400"><i class="fab fa-tiktok"></i> Not provided</span>
+          <% } %>
+        </li>
+        <li>
+          <% if (creator.website) { %>
+            <a href="<%= creator.website %>" target="_blank" class="text-[#7E5DFA] font-semibold hover:underline">
+              <i class="fas fa-globe"></i> Website
+            </a>
+          <% } else { %>
+            <span class="text-gray-400"><i class="fas fa-globe"></i> Not provided</span>
+          <% } %>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Gallery -->
+    <section class="bg-white p-6 rounded-lg border border-[#C1C1C1] shadow-sm">
+      <h2 class="text-2xl font-semibold mb-4">🎨 Gallery</h2>
+      <% if (creator.images && creator.images.length > 0) { %>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <% creator.images.forEach(image => { %>
+            <img src="<%= image.url %>" alt="Creator upload" class="rounded-lg object-cover border border-[#EAEAEA]" />
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="text-sm text-gray-400">No images uploaded yet.</p>
+      <% } %>
+    </section>
+
+    <!-- Events -->
+    <section class="bg-white p-6 rounded-lg border border-[#C1C1C1] shadow-sm">
+      <h2 class="text-2xl font-semibold mb-4">📅 Events Attending</h2>
+      <% if (creator.eventsAttending && creator.eventsAttending.length > 0) { %>
+        <ul class="space-y-1 text-sm">
+          <% creator.eventsAttending.forEach(event => { %>
+            <li>🟣 <%= event.title %> – <%= new Date(event.date).toLocaleDateString() %></li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p class="text-sm text-gray-400">No events added yet.</p>
+      <% } %>
+    </section>
+
+  </div>
+</main>
+
+<script>
+  const heart = document.getElementById("heart");
+
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("liked") === "true") {
+    heart.classList.add("scale-150"); 
+
+    setTimeout(() => {
+      heart.classList.remove("scale-150");
+    }, 300);
+  }
+</script>
+
+<%- include('partials/footer') -%>

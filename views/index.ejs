@@ -1,0 +1,36 @@
+<%- include('partials/loginHeader') -%>
+
+<main class="min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center px-6 py-12"
+style="background-image: url('/imgs/BK.png');">
+
+<!-- Glass container - now larger -->
+<div class="backdrop-blur-md bg-white/60 p-14 rounded-2xl shadow-xl flex flex-col items-center gap-10 max-w-lg w-full">
+
+<!-- Logo -->
+<a href="/" class="flex flex-col items-center">
+<img src="/imgs/Gather.png" alt="Gather Haus Logo" class="w-48 h-48 object-contain" />
+</a>
+
+<!-- Auth Buttons -->
+<div class="flex flex-col sm:flex-row gap-6 w-full justify-center">
+<a href="/login"
+  class="border-2 border-[#7E5DFA] text-[#1F1F1F] font-bold text-lg px-8 py-4 rounded-md shadow-sm 
+         hover:bg-[#7E5DFA] hover:text-white hover:scale-105 transition-all duration-300 text-center w-full sm:w-auto">
+  Login
+</a>
+
+<a href="/signup"
+  class="border-2 border-[#5FC4B6] text-[#1F1F1F] font-bold text-lg px-8 py-4 rounded-md shadow-sm 
+         hover:bg-[#5FC4B6] hover:text-white hover:scale-105 transition-all duration-300 text-center w-full sm:w-auto">
+  Signup
+</a>
+</div>
+
+</div>
+
+</main>
+
+
+    
+
+<%- include('partials/footer') -%>
